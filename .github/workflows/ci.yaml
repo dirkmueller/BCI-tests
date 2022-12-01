@@ -102,6 +102,13 @@ jobs:
         os_version:
           - 15.3
           - 15.4
+        exclude:
+          # exclude language pack container testing on old SPs
+          - os_version: 15.3
+            toxenv: (dotnet|python|ruby|node|go|openjdk|rust)
+          # exclude app container testing on old SPs
+          - os_version: 15.3
+            toxenv: (389ds|pcp)
     steps:
       - name: checkout source code
         uses: actions/checkout@v3
