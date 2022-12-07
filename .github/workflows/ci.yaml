@@ -49,12 +49,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_version: ["3.6", "3.8", "3.9", "3.10"]
+        python_version: ["3.6", "3.9", "3.10"]
     container:
       image: registry.suse.com/bci/python:${{ matrix.python_version }}
     steps:
-      - uses: actions/checkout@v3
-
+      - name: checkout source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Install tox
         run: |
           python3 --version
@@ -62,7 +64,6 @@ jobs:
           python3 -m pip install tox
       - run: 'tox -e py$(echo $PY_VER | tr -d . )-unit -- -n auto'
         env:
-          SETUPTOOLS_SCM_PRETEND_VERSION: 0.0.1
           PY_VER: ${{ matrix.python_version }}
 
   documentation:
