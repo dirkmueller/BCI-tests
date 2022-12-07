@@ -64,6 +64,7 @@ jobs:
           python3 -m pip install tox
       - run: 'tox -e py$(echo $PY_VER | tr -d . )-unit -- -n auto'
         env:
+          SETUPTOOLS_SCM_PRETEND_VERSION: 1.2.3
           PY_VER: ${{ matrix.python_version }}
 
   documentation:
