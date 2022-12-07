@@ -51,7 +51,7 @@ jobs:
       matrix:
         python_version: ["3.6", "3.7", "3.8", "3.9", "3.10"]
     container:
-      image: python:${{ matrix.python_version }}
+      image: registry.suse.com/bci/python:${{ matrix.python_version }}
     steps:
       - uses: actions/checkout@v3
 
