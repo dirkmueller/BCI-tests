@@ -318,6 +318,8 @@ def create_BCI(
     )
 
 
+LTSS_VERSIONS = ["15.3"]
+
 LTSS_CONTAINERS = []
 
 if OS_VERSION == "tumbleweed":
@@ -337,14 +339,14 @@ else:
             LTSS_CONTAINERS.append(
                 create_BCI(
                     build_tag=f"{APP_CONTAINER_PREFIX}/ltss/sle15.3/bci-base:{OS_CONTAINER_TAG}",
-                    available_versions=["15.3"],
+                    available_versions=LTSS_VERSIONS,
                     bci_type=ImageType.OS_LTSS,
                 )
             )
         LTSS_CONTAINERS.append(
             create_BCI(
                 build_tag=f"{APP_CONTAINER_PREFIX}/ltss/sle15.3/bci-base-fips:{OS_CONTAINER_TAG}",
-                available_versions=["15.3"],
+                available_versions=LTSS_VERSIONS,
                 bci_type=ImageType.OS_LTSS,
             )
         )
