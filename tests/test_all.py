@@ -88,6 +88,23 @@ def test_os_release(auto_container):
             == expected_value
         )
 
+@pytest.mark.skipif(
+    OS_VERSION in ("15.3", "15.4", "15.5"),
+    reason="branding packages are known to not be installed"
+)
+def test_branding(auto_container):
+    """
+    check that the :file:`/etc/SUSE-brand` file exists and containers SLE branding
+    """
+    location = "/etc/SUSE-brand"
+    branding = "SLE"
+    if OS_VERSION == "tumbleweed":
+        branding = "openSUSE"
+    if OS_VERSION in ("basalt", "tumbleweed"):
+        location = "/usr/etc/SUSE-brand"
+    assert auto_container.connection.file(location).exists
+    assert branding in auto_container.connection.file(location).content_string
+
 
 def test_product(auto_container):
     """
