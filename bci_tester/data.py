@@ -77,14 +77,13 @@ ALLOWED_BCI_REPO_OS_VERSIONS = (
 )
 
 # Test Language and Application containers by default for these versions
-_DEFAULT_NONBASE_SLE_VERSIONS = ("15.7", "16.0", "16.1")
+_DEFAULT_NONBASE_SLE_VERSIONS = ("15.7", "16.1")
 
 # Test Language and Application containers by default for these versions
 _DEFAULT_NONBASE_OS_VERSIONS = ("15.7", "16.0", "16.1", "tumbleweed")
 
 # SLFO 16.0+ Test Language and Application containers by default for these versions
-_DEFAULT_NONBASE_SLFOPLUS_VERSIONS = ("16.0", "16.1", "tumbleweed")
-
+_DEFAULT_NONBASE_SLFOPLUS_VERSIONS = ("16.1", "tumbleweed")
 
 # Test base containers by default for these versions
 _DEFAULT_BASE_OS_VERSIONS = ("15.7", "16.0", "16.1", "tumbleweed")
@@ -471,7 +470,6 @@ def create_BCI(
 KIWI_CONTAINERS = [
     create_BCI(build_tag=f"bci/kiwi:{tag}", available_versions=(ver,))
     for ver, tag in (
-        ("16.0", "10.2"),
         ("16.1", "10.2"),
         ("tumbleweed", "latest"),
     )
@@ -1134,7 +1132,7 @@ KEA_CONTAINERS = [
     )
     for kea_ver, os_versions in (
         ("2.6", ("15.7",)),
-        ("3.0", ("16.0", "16.1")),
+        ("3.0", ("16.1",)),
         ("latest", ("tumbleweed",)),
     )
 ]
@@ -1235,8 +1233,8 @@ PROMETHEUS_CONTAINERS = [
         available_versions=versions,
     )
     for tag, versions in (
-        ("3", ("15.7",)),
-        ("3", ("16.0", "16.1", "tumbleweed")),
+        ("3", _DEFAULT_NONBASE_SLE_VERSIONS),
+        ("3", ("tumbleweed",)),
     )
 ]
 
